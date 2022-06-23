@@ -1,0 +1,220 @@
+local Place = game.PlaceId
+_G.LIFTINGSIM = 3652625463
+
+if Place == _G.LIFTINGSIM then
+    if game:GetService("CoreGui"):FindFirstChild("101010") then game:GetService("CoreGui"):FindFirstChild("101010"):Destroy() end
+
+    game.StarterGui:SetCore("SendNotification", 
+     {
+        Title = "Lifting Simulator"; 
+        Text = "Loaded!"; 
+        Icon = "rbxthumb://type=Asset&id=714343977&w=150&h=150"; Duration = 10; })
+
+    local UIS = game:GetService("UserInputService")
+
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/tst/main/test"))()
+    local Window = Library.CreateLib("Lifting Simulator", "DarkTheme")
+    local Tab1 = Window:NewTab("Page 1")
+
+    local Section1 = Tab1:NewSection("Main")
+
+    Section1:NewToggle("Auto Gain", "Auto Gains strength.", function(state)
+        if state then
+            _G.Lift = true
+
+            while _G.Lift do
+                wait(1.3)
+            local table_1 = {
+            [1] = 'GainMuscle'
+            };
+            local Target = game:GetService("ReplicatedStorage").RemoteEvent;
+            Target:FireServer(table_1);
+            end
+        else
+            _G.Lift = false
+        end
+    end)
+
+    Section1:NewToggle("Auto Sell", "Auto Sells strength.", function(state)
+        if state then
+                _G.Sell = true
+
+            while _G.Sell do
+                wait()
+            local table_1 = {
+            [1] = 'SellMuscle'
+            };
+            local Target = game:GetService("ReplicatedStorage").RemoteEvent;
+            Target:FireServer(table_1);
+            end
+        else
+            _G.Sell = false
+        end
+    end)
+
+    Section1:NewToggle("Safe", "Teleports you to safezone.", function(statesmen)
+        if statesmen then
+            _G.TP1 = true
+            while _G.TP1 == true do
+                    task.wait()
+                    local plr = game.Players
+                    local lplr = plr.LocalPlayer
+                    local lchar = lplr.Character
+                    local HRP = lchar.HumanoidRootPart
+
+                    HRP.CFrame = CFrame.new(-634.539978, -50, 1859.41003)
+                    task.wait(0.25)
+                    HRP.CFrame = CFrame.new(-634.539978, -53.9, 1859.41003)
+                end
+            else
+            _G.TP1 = false
+        end
+    end)
+
+    --[[Section1:NewToggle("Equip Tool", "Tool Equip", function(state)
+        if state then
+            local Name = "Earth Bar"
+            _G.AutoEquip = state
+            if _G.AutoEquip == true then
+                local Tool = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Name)
+                while task.wait() do
+                    Tool.Parent = game:GetService("Players").LocalPlayer.Character
+                end
+            elseif _G.AutoEquip == false then
+                local ToolFind = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Name)
+                while task.wait() do
+                    ToolFind.Parent = game:GetService("Players").LocalPlayer.Backpack
+                end
+            end
+        end
+    end)]]--
+
+    --[[Section1:NewToggle("Equip Tool", "Tool Equip", function(state)
+        if state then
+            local name = "Earth Bar"
+            local e = true
+            if e == true then
+                e = false
+                if game.Players.LocalPlayer.Backpack:FindFirstChild(name) then
+                local thetool = game.Players.LocalPlayer.Backpack:FindFirstChild(name)
+                task.wait(0.5)
+                thetool.Parent = game.Players.LocalPlayer.Character
+            else
+                end
+            end
+        end
+    end)]]--
+
+    --[[Section1:NewToggle("Equip Tool", "Auto Equips your tool", function(state)
+        if state then
+            _G.EP = true
+            while _G.EP == true do
+                wait(0.5)
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/Equip1/main/eeq"))()
+            end
+            else
+            _G.EP = false
+        end
+    end)]]--
+
+    Section1:NewButton("Tool Auto Clicker", "Tool Clicker.", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/autoclicktool/main/click"))()
+    end)
+
+    Section1:NewButton("AutoClicker", "A good built in autoclicker.", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/ac/main/autoclick"))()
+    end)
+
+    Section1:NewTextBox("View Player", "Views a player.", function(Target)
+        game:GetService("Workspace").CurrentCamera.CameraSubject = game:GetService("Players")[Target].Character:WaitForChild("Humanoid")
+    end)
+
+    Section1:NewButton("Unview Player", "Views you as your localplayer.", function()
+        game:GetService("Workspace").CurrentCamera.CameraSubject = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
+    end)
+
+    local Tab2 = Window:NewTab("Page 2")
+
+    local Section2 = Tab2:NewSection("Extras")
+
+    Section2:NewButton("Auto Gain", "Strength Button.", function()
+        _G.Lift = true
+
+        while _G.Lift do
+            wait(1.3)
+        local table_1 = {
+        [1] = 'GainMuscle'
+        };
+        local Target = game:GetService("ReplicatedStorage").RemoteEvent;
+        Target:FireServer(table_1);
+        end
+    end)
+
+    Section2:NewButton("Auto Gain Off", "Strength Button.", function()
+        _G.Lift = false
+    end)
+
+    Section2:NewToggle("Admin Panel", "Open's up the games admin panel.", function(Tag)
+        game:GetService("Players").LocalPlayer.PlayerGui.Main_Gui.Ban_Btn.Visible = Tag
+    end)
+
+    Section2:NewButton("Shop GUI", "Open's the Shop UI.", function()
+        game:GetService("Players").LocalPlayer.PlayerGui.Main_Gui.UpgradeMenu_Frame.Visible = true
+    end)
+
+    local Tab3 = Window:NewTab("Page 3")
+
+    local Section3 = Tab3:NewSection("Boss NPC'S")
+
+    local Tab4 = Window:NewTab("Page 4")
+
+    local Section4 = Tab4:NewSection("Teleport")
+
+    Section4:NewTextBox("Teleport to Player", "Teleports to player input in the box.", function(TeleportTarget)
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[TeleportTarget].Character.HumanoidRootPart.CFrame
+    end)
+
+    local Tab6 = Window:NewTab("Miscellaneous")
+
+    local Section6 = Tab6:NewSection("Extra Scripts")
+
+    Section6:NewLabel("Credits to Hidden#4642 for making this.")
+
+    Section6:NewButton("Discord Link", "Click the button for my discord link.", function()
+        setclipboard("https://discord.gg/G6Pm4KJAff")
+    end)
+
+    Section6:NewButton("Hitbox GUI", "Hitbox Expander.", function()
+        loadstring(game:HttpGet("http://gameovers.net/Scripts/Free/HitboxExpander/main.lua", true))()
+    end)
+
+    Section6:NewButton("IY Admin", "Loads Infinite Yield", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end)
+
+    Section6:NewButton("The Force", "Force Unanchored parts to move with a tool.", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/the-force/main/theone"))()
+    end)
+
+    Section6:NewButton("Waistless", "Seperates your  body and removes waist..", function()
+        game.Players.LocalPlayer.Character.UpperTorso.Waist:Destroy()
+    end)
+
+    Section6:NewButton("FE Netless", "Bypass Netless.", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/netttt/main/fenet"))()
+    end)
+
+    Section6:NewButton("Rejoin", "Rejoins the server.", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/rj/main/rejoin"))()
+    end)
+    wait(0.1)
+    game:GetService("CoreGui")["101010"].DisplayOrder = ("2147483647")
+    UIS.InputBegan:Connect(function(I,G)
+        if G then return end
+        if I.KeyCode == Enum.KeyCode.B then
+            game:GetService("CoreGui"):FindFirstChild("101010").Enabled = not game:GetService("CoreGui"):FindFirstChild("101010").Enabled
+        end
+    end)
+else
+    print("Wrong game!")
+end
