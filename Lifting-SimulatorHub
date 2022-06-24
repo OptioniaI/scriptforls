@@ -207,14 +207,20 @@ if Place == _G.LIFTINGSIM then
     Section6:NewButton("Rejoin", "Rejoins the server.", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/rj/main/rejoin"))()
     end)
+    Section6:NewButton("Dark Dex V4", "This is the official dark dex synapse version that's currently working.", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/DV4/main/Dex"))()
+    end)
+    Section6:NewKeybind("Toggle UI", "The keybind is whatever you desire.", Enum.KeyCode.T, function()
+    	Library:ToggleUI()
+    end)
     wait(0.1)
     game:GetService("CoreGui")["101010"].DisplayOrder = ("2147483647")
-    UIS.InputBegan:Connect(function(I,G)
+    --[[UIS.InputBegan:Connect(function(I,G)
         if G then return end
         if I.KeyCode == Enum.KeyCode.B then
             game:GetService("CoreGui"):FindFirstChild("101010").Enabled = not game:GetService("CoreGui"):FindFirstChild("101010").Enabled
         end
-    end)
+    end)]]--
 else
     print("Wrong game!")
 end
