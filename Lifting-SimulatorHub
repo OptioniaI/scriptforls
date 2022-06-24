@@ -23,7 +23,7 @@ if Place == _G.LIFTINGSIM then
             _G.Lift = true
 
             while _G.Lift do
-                wait(1.3)
+                task.wait(1.3)
             local table_1 = {
             [1] = 'GainMuscle'
             };
@@ -40,7 +40,7 @@ if Place == _G.LIFTINGSIM then
                 _G.Sell = true
 
             while _G.Sell do
-                wait()
+                task.wait()
             local table_1 = {
             [1] = 'SellMuscle'
             };
@@ -141,7 +141,7 @@ if Place == _G.LIFTINGSIM then
         _G.Lift = true
 
         while _G.Lift do
-            wait(1.3)
+            task.wait(1.3)
         local table_1 = {
         [1] = 'GainMuscle'
         };
