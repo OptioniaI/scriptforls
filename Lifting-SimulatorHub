@@ -11,6 +11,18 @@ if Place == _G.LIFTINGSIM then
         Icon = "rbxthumb://type=Asset&id=714343977&w=150&h=150"; Duration = 10; })
 
     local UIS = game:GetService("UserInputService")
+    local Players = game:GetService("Players")
+    local Player = Players.LocalPlayer
+    local Character = Player.Character
+    local RootPart = Character.HumanoidRootPart
+    local RE = game:GetService("ReplicatedStorage").RemoteEvent
+
+    local T1 = {
+        [1] = "GainMuscle"
+    }
+    local T2 = {
+        [1] = "SellMuscle"
+    }
 
     local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptioniaI/tst/main/test"))()
     local Window = Library.CreateLib("Lifting Simulator", "DarkTheme")
@@ -18,61 +30,59 @@ if Place == _G.LIFTINGSIM then
 
     local Section1 = Tab1:NewSection("Main")
 
-    Section1:NewToggle("Auto Gain", "Auto Gains strength.", function(state)
-        if state then
+    Section1:NewToggle("Auto Gain", "Auto Gains strength.", function(State)
+        if State then
             _G.Lift = true
-
             while _G.Lift do
                 wait(1.3)
-            local table_1 = {
-            [1] = 'GainMuscle'
-            };
-            local Target = game:GetService("ReplicatedStorage").RemoteEvent;
-            Target:FireServer(table_1);
+                RE:FireServer(T1)
             end
         else
             _G.Lift = false
         end
     end)
 
-    Section1:NewToggle("Auto Sell", "Auto Sells strength.", function(state)
-        if state then
-                _G.Sell = true
-
+    Section1:NewToggle("Auto Sell", "Auto Sells strength.", function(State)
+        if State then
+            _G.Sell = true
             while _G.Sell do
                 wait()
-            local table_1 = {
-            [1] = 'SellMuscle'
-            };
-            local Target = game:GetService("ReplicatedStorage").RemoteEvent;
-            Target:FireServer(table_1);
+                RE:FireServer(T2)
             end
         else
             _G.Sell = false
         end
     end)
 
-    Section1:NewToggle("Safe", "Teleports you to safezone.", function(statesmen)
-        if statesmen then
+    Section1:NewToggle("Safe", "Teleports you to safezone.", function(State)
+        if State then
             _G.TP1 = true
             while _G.TP1 == true do
-                    task.wait()
-                    local plr = game.Players
-                    local lplr = plr.LocalPlayer
-                    local lchar = lplr.Character
-                    local HRP = lchar.HumanoidRootPart
-
-                    HRP.CFrame = CFrame.new(-634.539978, -50, 1859.41003)
-                    task.wait(0.5)
-                    HRP.CFrame = CFrame.new(-634.539978, -56.085, 1859.41003)
-                end
-            else
+                task.wait()
+                RootPart.CFrame = CFrame.new(-634.539978, -50, 1859.41003)
+                task.wait(0.25)
+                RootPart.CFrame = CFrame.new(-634.539978, -54, 1859.41003)
+            end
+        else
             _G.TP1 = false
         end
     end)
 
-    --[[Section1:NewToggle("Equip Tool", "Tool Equip", function(state)
-        if state then
+    Section1:NewToggle("Safe 2", "Auto Jumps.", function(State)
+        if State then
+            _G.AJT = true
+            RootPart.CFrame = CFrame.new(-634.539978, -50, 1859.41003)
+            while _G.AJT do
+                task.wait(0.7)
+                Character.Humanoid:ChangeState("Jumping")
+            end
+        else
+            _G.AJT = false
+        end
+    end)
+
+    --[[Section1:NewToggle("Equip Tool", "Tool Equip", function(State)
+        if State then
             local Name = "Earth Bar"
             _G.AutoEquip = state
             if _G.AutoEquip == true then
@@ -89,8 +99,8 @@ if Place == _G.LIFTINGSIM then
         end
     end)]]--
 
-    --[[Section1:NewToggle("Equip Tool", "Tool Equip", function(state)
-        if state then
+    --[[Section1:NewToggle("Equip Tool", "Tool Equip", function(State)
+        if State then
             local name = "Earth Bar"
             local e = true
             if e == true then
@@ -105,8 +115,8 @@ if Place == _G.LIFTINGSIM then
         end
     end)]]--
 
-    --[[Section1:NewToggle("Equip Tool", "Auto Equips your tool", function(state)
-        if state then
+    --[[Section1:NewToggle("Equip Tool", "Auto Equips your tool", function(State)
+        if State then
             _G.EP = true
             while _G.EP == true do
                 wait(0.5)
@@ -130,7 +140,7 @@ if Place == _G.LIFTINGSIM then
     end)
 
     Section1:NewButton("Unview Player", "Views you as your localplayer.", function()
-        game:GetService("Workspace").CurrentCamera.CameraSubject = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
+        game:GetService("Workspace").CurrentCamera.CameraSubject = Character:WaitForChild("Humanoid")
     end)
 
     local Tab2 = Window:NewTab("Page 2")
@@ -139,14 +149,9 @@ if Place == _G.LIFTINGSIM then
 
     Section2:NewButton("Auto Gain", "Strength Button.", function()
         _G.Lift = true
-
         while _G.Lift do
-            wait(1.3)
-        local table_1 = {
-        [1] = 'GainMuscle'
-        };
-        local Target = game:GetService("ReplicatedStorage").RemoteEvent;
-        Target:FireServer(table_1);
+            task.wait(1.3)
+            RE:FireServer(T1);
         end
     end)
 
@@ -155,11 +160,11 @@ if Place == _G.LIFTINGSIM then
     end)
 
     Section2:NewToggle("Admin Panel", "Open's up the games admin panel.", function(Tag)
-        game:GetService("Players").LocalPlayer.PlayerGui.Main_Gui.Ban_Btn.Visible = Tag
+        Player.PlayerGui.Main_Gui.Ban_Btn.Visible = Tag
     end)
 
     Section2:NewButton("Shop GUI", "Open's the Shop UI.", function()
-        game:GetService("Players").LocalPlayer.PlayerGui.Main_Gui.UpgradeMenu_Frame.Visible = true
+        Player.PlayerGui.Main_Gui.UpgradeMenu_Frame.Visible = true
     end)
 
     local Tab3 = Window:NewTab("Page 3")
@@ -171,14 +176,14 @@ if Place == _G.LIFTINGSIM then
     local Section4 = Tab4:NewSection("Teleport")
 
     Section4:NewTextBox("Teleport to Player", "Teleports to player input in the box.", function(TeleportTarget)
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[TeleportTarget].Character.HumanoidRootPart.CFrame
+        RootPart.CFrame = game:GetService("Players")[TeleportTarget].Character.HumanoidRootPart.CFrame
     end)
 
     local Tab6 = Window:NewTab("Miscellaneous")
 
     local Section6 = Tab6:NewSection("Extra Scripts")
 
-    Section6:NewLabel("Credits to Hidden#4642 for making this.")
+    Section6:NewLabel("Credits to Hidden#5174 for making this.")
 
     Section6:NewButton("Discord Link", "Click the button for my discord link.", function()
         setclipboard("https://discord.gg/G6Pm4KJAff")
@@ -197,7 +202,7 @@ if Place == _G.LIFTINGSIM then
     end)
 
     Section6:NewButton("Waistless", "Seperates your  body and removes waist..", function()
-        game.Players.LocalPlayer.Character.UpperTorso.Waist:Destroy()
+        Character.UpperTorso.Waist:Destroy()
     end)
 
     Section6:NewButton("FE Netless", "Bypass Netless.", function()
